@@ -1,10 +1,7 @@
 name: CMake - Build and Test
 
 on:
-  pull_request:
-    branches: [ main, main-dev ]
-  push:
-    branches: [ main ]
+  workflow_dispatch: 
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -81,12 +78,12 @@ jobs:
           # 只运行集成测试中的基础 join pipeline 用例
           ctest --test-dir build --output-on-failure -R "(^test_pipeline_basic$)" -L INTEGRATION
       
-      - name: Upload test logs on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ctest-logs
-          path: |
-            build/Testing/**
-            build/*.log
-            build/**/compile_commands.json
+      # - name: Upload test logs on failure
+      #   if: failure()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: ctest-logs
+      #     path: |
+      #       build/Testing/**
+      #       build/*.log
+      #       build/**/compile_commands.json
