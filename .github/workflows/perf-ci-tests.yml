@@ -3,8 +3,8 @@ name: Performance Testing - Parallel Join
 on:
   pull_request:
     branches: [ main, main-dev ]
-  push:
-    branches: [ main ]
+  # push:
+  #   branches: [ main ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
